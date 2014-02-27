@@ -22,13 +22,7 @@ libc_openbsd_src_files_arm += \
 # Default implementations of functions that are commonly optimized.
 #
 
-# cortex-a9 without neon
-ifneq ($(TARGET_CPU_VARIANT),tegra2)
-libc_common_src_files_arm += \
-	bionic/memchr.c
-endif
-
-libc_common_src_files_arm += \
+libc_bionic_src_files_arm += \
     bionic/memrchr.c \
     bionic/strchr.cpp \
     bionic/strnlen.c \
