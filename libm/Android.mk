@@ -261,6 +261,16 @@ ifeq ($(TARGET_USE_QCOM_BIONIC_OPTIMIZATION),true)
     upstream-freebsd/lib/msun/src/s_sin.c \
     upstream-freebsd/lib/msun/src/e_sqrtf.c \
     upstream-freebsd/lib/msun/src/e_sqrt.c
+else ifeq ($(TARGET_CPU_VARIANT),$(filter $(TARGET_CPU_VARIANT),cortex-a9 tegra2))
+  libm_arm_src_files += \
+    arm/e_sqrt.S \
+    arm/e_sqrtf.S
+  libm_arm_cflags += -fno-if-conversion
+  libm_arm_includes += $(LOCAL_PATH)/../libc/
+
+  libm_common_src_files += \
+    upstream-freebsd/lib/msun/src/s_cos.c \
+    upstream-freebsd/lib/msun/src/s_sin.c
 else
   libm_common_src_files += \
     upstream-freebsd/lib/msun/src/s_cos.c \
