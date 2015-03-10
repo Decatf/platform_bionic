@@ -1,6 +1,7 @@
 libc_bionic_src_files_arm += \
 	arch-arm/generic/bionic/memcpy.S \
 	arch-arm/generic/bionic/memset.S \
+	upstream-openbsd/lib/libc/string/stpcpy.c \
 	upstream-openbsd/lib/libc/string/strcat.c \
 	arch-arm/cortex-a15/bionic/strcmp.S \
 	arch-arm/generic/bionic/strcpy.S \
