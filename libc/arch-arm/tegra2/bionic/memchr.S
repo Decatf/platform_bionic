@@ -27,20 +27,23 @@
    THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
+/*
    Written by Dave Gilbert <david.gilbert@linaro.org>
+   Adapted to work inside Bionic by Bernhard Rosenkränzer <bero@linaro.org>
 
    This memchr routine is optimised on a Cortex-A9 and should work on
    all ARMv7 processors.   It has a fast past for short sizes, and has
    an optimised path for large data sets; the worst case is finding the
-   match early in a large data set. */
+   match early in a large data set.
 
-@ 2011-02-07 david.gilbert@linaro.org
-@    Extracted from local git a5b438d861
-@ 2011-07-14 david.gilbert@linaro.org
-@    Import endianness fix from local git ea786f1b
-@ 2011-12-07 david.gilbert@linaro.org
-@    Removed unneeded cbz from align loop
+ */
+
+// Prototype: void *memchr(const void *s, int c, size_t n);
+
+#include <private/bionic_asm.h>
+#include "private/libc_events.h"
 
 	.syntax unified
 	.arch armv7-a
@@ -55,12 +58,10 @@
 	.thumb
 
 @ ---------------------------------------------------------------------------
+ENTRY(memchr)
 	.thumb_func
 	.align 2
 	.p2align 4,,15
-	.global memchr
-	.type memchr,%function
-memchr:
 	@ r0 = start of memory to scan
 	@ r1 = character to look for
 	@ r2 = length
@@ -68,7 +69,7 @@ memchr:
 	and	r1,r1,#0xff	@ Don't think we can trust the caller to actually pass a char
 
 	cmp	r2,#16		@ If it's short don't bother with anything clever
-	blt	20f
+	blt	20f 
 
 	tst	r0, #7		@ If it's already aligned skip the next bit
 	beq	10f
@@ -81,7 +82,7 @@ memchr:
 	beq	50f		@ If it matches exit found
 	tst	r0, #7
 	bne	5b		@ If not aligned yet then do next byte
-
+	
 10:
 	@ At this point, we are aligned, we know we have at least 8 bytes to work with
 	push	{r4,r5,r6,r7}
@@ -90,7 +91,7 @@ memchr:
 	bic	r4, r2, #7	@ Number of double words to work with
 	mvns	r7, #0		@ all F's
 	movs	r3, #0
-
+	
 15:
 	ldmia	r0!,{r5,r6}
 	subs	r4, r4, #8
@@ -106,7 +107,7 @@ memchr:
 	pop	{r4,r5,r6,r7}
 	and	r1,r1,#0xff	@ Get r1 back to a single character from the expansion above
 	and	r2,r2,#7	@ Leave the count remaining as the number after the double words have been done
-
+ 
 20:
 	cbz	r2, 40f		@ 0 length or hit the end already then not found
 
@@ -149,3 +150,4 @@ memchr:
 	pop	{r4,r5,r6,r7}
 	subs	r0,r0,#1
 	bx	lr
+END(memchr)
