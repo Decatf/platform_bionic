@@ -24,9 +24,8 @@ libc_openbsd_src_files_arm += \
 
 # cortex-a9 without neon
 ifneq ($(TARGET_CPU_VARIANT),tegra2)
-libc_common_src_files += \
-	bionic/memchr.c \
-
+libc_common_src_files_arm += \
+	bionic/memchr.c
 endif
 
 libc_common_src_files_arm += \
