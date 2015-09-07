@@ -117,6 +117,8 @@ libm_common_src_files += \
     upstream-freebsd/lib/msun/src/s_exp2f.c \
     upstream-freebsd/lib/msun/src/s_expm1.c \
     upstream-freebsd/lib/msun/src/s_expm1f.c \
+    upstream-freebsd/lib/msun/src/s_fabs.c \
+    upstream-freebsd/lib/msun/src/s_fabsf.c \
     upstream-freebsd/lib/msun/src/s_fdim.c \
     upstream-freebsd/lib/msun/src/s_finite.c \
     upstream-freebsd/lib/msun/src/s_finitef.c \
@@ -257,9 +259,8 @@ libm_arm_arch_files += \
 
 libm_arm_arch_files += \
     arm/e_sqrt.S \
-    arm/e_sqrtf.S \
-    arm/fabs.S \
-    arm/fabsf.S
+    arm/e_sqrtf.S
+
 libm_arm_cflags += -fno-if-conversion
 
 # Use the C version on armv7-a since it doesn't support neon instructions.
@@ -279,9 +280,7 @@ libm_arm_arch_files += \
     arm/s_sin.S \
     arm/e_sqrt.S \
     arm/e_sqrtf.S \
-    arm/s_floor.S \
-    arm/fabs.S \
-    arm/fabsf.S
+    arm/s_floor.S
 
 libm_arm_arch_cflags += -DQCOM_NEON_OPTIMIZATION -fno-if-conversion
 endif
