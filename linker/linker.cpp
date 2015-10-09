@@ -3321,15 +3321,15 @@ bool soinfo::link_image(const soinfo_list_t& global_group, const soinfo_list_t& 
 #if !defined(__LP64__)
   if (has_text_relocations) {
     // Fail if app is targeting M or above.
-    if (get_application_target_sdk_version() >= __ANDROID_API_M__) {
-      DL_ERR_AND_LOG("\"%s\" has text relocations (https://android.googlesource.com/platform/"
-                     "bionic/+/master/android-changes-for-ndk-developers.md#Text-Relocations-"
-                     "Enforced-for-API-level-23)", get_realpath());
-      return false;
-    }
+    // if (get_application_target_sdk_version() >= __ANDROID_API_M__) {
+    //   DL_ERR_AND_LOG("\"%s\" has text relocations (https://android.googlesource.com/platform/"
+    //                  "bionic/+/master/android-changes-for-ndk-developers.md#Text-Relocations-"
+    //                  "Enforced-for-API-level-23)", get_realpath());
+    //   return false;
+    // }
     // Make segments writable to allow text relocations to work properly. We will later call
     // phdr_table_protect_segments() after all of them are applied.
-    DL_WARN("\"%s\" has text relocations (https://android.googlesource.com/platform/"
+    DEBUG("\"%s\" has text relocations (https://android.googlesource.com/platform/"
             "bionic/+/master/android-changes-for-ndk-developers.md#Text-Relocations-Enforced-"
             "for-API-level-23)", get_realpath());
     add_dlwarning(get_realpath(), "text relocations");
