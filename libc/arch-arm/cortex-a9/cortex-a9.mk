@@ -1,3 +1,4 @@
+ifeq ($(strip $(ARCH_ARM_HAVE_NEON)),true)
 libc_openbsd_src_files_exclude_arm += \
     upstream-openbsd/lib/libc/string/memmove.c \
     upstream-openbsd/lib/libc/string/stpcpy.c \
@@ -26,3 +27,24 @@ libc_bionic_src_files_arm += \
 
 libc_bionic_src_files_arm += \
     arch-arm/denver/bionic/memmove.S \
+
+else
+
+libc_openbsd_src_files_exclude_arm += \
+    upstream-openbsd/lib/libc/string/stpcpy.c \
+    upstream-openbsd/lib/libc/string/strcat.c \
+    upstream-openbsd/lib/libc/string/strcpy.c \
+
+libc_bionic_src_files_exclude_arm += \
+    arch-arm/generic/bionic/strcmp.S \
+    arch-arm/generic/bionic/strcpy.S \
+    arch-arm/generic/bionic/strlen.c \
+
+libc_bionic_src_files_arm += \
+    arch-arm/cortex-a9/bionic/stpcpy.S \
+    arch-arm/cortex-a9/bionic/strcat.S \
+    arch-arm/cortex-a9/bionic/strcmp.S \
+    arch-arm/cortex-a9/bionic/strcpy.S \
+    arch-arm/cortex-a9/bionic/strlen.S \
+
+endif
