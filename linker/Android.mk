@@ -64,6 +64,8 @@ LOCAL_STATIC_LIBRARIES := libc_nomalloc libziparchive libutils libz liblog
 
 LOCAL_FORCE_STATIC_EXECUTABLE := true
 
+LOCAL_CLANG := false
+
 LOCAL_MODULE := linker
 LOCAL_MODULE_STEM_32 := linker
 LOCAL_MODULE_STEM_64 := linker64
