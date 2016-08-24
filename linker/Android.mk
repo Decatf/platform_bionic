@@ -2,7 +2,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_CLANG := true
+LOCAL_CLANG := false
 
 LOCAL_SRC_FILES := \
     debugger.cpp \
@@ -49,6 +49,7 @@ LOCAL_CONLYFLAGS += \
 
 LOCAL_CPPFLAGS += \
     -Wold-style-cast \
+    -Wno-ignored-qualifiers \
 
 ifeq ($(TARGET_IS_64_BIT),true)
 LOCAL_CPPFLAGS += -DTARGET_IS_64_BIT
