@@ -291,6 +291,16 @@ LOCAL_SRC_FILES_EXCLUDE_arm += \
 
 endif
 
+ifeq ($(TARGET_TEGRA_VERSION),t20)
+LOCAL_SRC_FILES_arm += \
+    arm/sqrt.S \
+
+LOCAL_SRC_FILES_EXCLUDE_arm += \
+    upstream-freebsd/lib/msun/src/e_sqrt.c \
+    upstream-freebsd/lib/msun/src/e_sqrtf.c \
+
+endif
+
 # -----------------------------------------------------------------------------
 # arm64
 # -----------------------------------------------------------------------------
