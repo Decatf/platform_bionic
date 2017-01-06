@@ -41,6 +41,10 @@ LOCAL_CFLAGS += \
     -fvisibility=hidden \
     -Wall -Wextra -Wunused -Werror \
 
+# Workaround for bad optimization
+LOCAL_CFLAGS_arm += -Os
+LOCAL_CFLAGS_arm64 += -O2
+
 LOCAL_CFLAGS_arm += -D__work_around_b_24465209__
 LOCAL_CFLAGS_x86 += -D__work_around_b_24465209__
 
