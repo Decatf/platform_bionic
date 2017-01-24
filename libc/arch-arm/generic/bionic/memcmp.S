@@ -29,12 +29,7 @@
 #include <machine/cpu-features.h>
 #include <private/bionic_asm.h>
 
-
-#ifdef HAVE_32_BYTE_CACHE_LINE
 #define CACHE_LINE_SIZE     32
-#else
-#define CACHE_LINE_SIZE     64
-#endif
 
 /*
  * Optimized memcmp() for Cortex-A9.
