@@ -4058,7 +4058,6 @@ bool soinfo::link_image(const soinfo_list_t& global_group, const soinfo_list_t& 
     // phdr_table_protect_segments() after all of them are applied.
     DEBUG("%s has text relocations. This is wasting memory and prevents "
             "security hardening. Please fix.", get_realpath());
-    add_dlwarning(get_realpath(), "text relocations");
     if (phdr_table_unprotect_segments(phdr, phnum, load_bias) < 0) {
       DL_ERR("can't unprotect loadable segments for \"%s\": %s",
              get_realpath(), strerror(errno));
