@@ -34,6 +34,9 @@
 #include "linker_globals.h"
 #include "linker_phdr.h"
 #include "linker_utils.h"
+#ifdef ENABLE_NON_PIE_SUPPORT
+#include "linker_non_pie.h"
+#endif
 
 #include "private/bionic_globals.h"
 #include "private/bionic_tls.h"
@@ -317,6 +320,12 @@ static ElfW(Addr) __linker_init_post_relocation(KernelArgumentBlock& args) {
 
   ElfW(Ehdr)* elf_hdr = reinterpret_cast<ElfW(Ehdr)*>(si->base);
 
+#ifdef ENABLE_NON_PIE_SUPPORT
+  if (allow_non_pie(executable_path)) {
+    DL_WARN("Non position independent executable (non PIE) allowed: %s",
+            executable_path);
+  } else {
+#endif
   // We haven't supported non-PIE since Lollipop for security reasons.
   if (elf_hdr->e_type != ET_DYN) {
     // We don't use __libc_fatal here because we don't want a tombstone: it's
@@ -332,6 +341,9 @@ static ElfW(Addr) __linker_init_post_relocation(KernelArgumentBlock& args) {
                      g_argv[0]);
     exit(EXIT_FAILURE);
   }
+#ifdef ENABLE_NON_PIE_SUPPORT
+  }
+#endif
 
   // Use LD_LIBRARY_PATH and LD_PRELOAD (but only if we aren't setuid/setgid).
   parse_LD_LIBRARY_PATH(ldpath_env);
