@@ -287,6 +287,16 @@ cc_library {
             srcs: [
                 "arm/fenv.c",
             ],
+            armv7_a: {
+                srcs: [
+                    "arm/sqrt.S",
+                ],
+
+                exclude_srcs: [
+                    "upstream-freebsd/lib/msun/src/e_sqrt.c",
+                    "upstream-freebsd/lib/msun/src/e_sqrtf.c",
+                ],
+            },
             armv7_a_neon: {
                 srcs: [
                     "arm/sqrt.S",
