@@ -3434,7 +3434,7 @@ bool soinfo::link_image(const soinfo_list_t& global_group, const soinfo_list_t& 
     DEBUG("\"%s\" has text relocations (https://android.googlesource.com/platform/"
             "bionic/+/master/android-changes-for-ndk-developers.md#Text-Relocations-Enforced-"
             "for-API-level-23)", get_realpath());
-    add_dlwarning(get_realpath(), "text relocations");
+    // add_dlwarning(get_realpath(), "text relocations");
     if (phdr_table_unprotect_segments(phdr, phnum, load_bias) < 0) {
       DL_ERR("can't unprotect loadable segments for \"%s\": %s",
              get_realpath(), strerror(errno));
