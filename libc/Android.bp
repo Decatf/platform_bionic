@@ -48,6 +48,7 @@ libc_common_flags = [
     "-Werror=int-to-pointer-cast",
     "-Werror=type-limits",
     "-Werror",
+    "-Wno-unicode",
 ]
 
 // Define some common cflags
@@ -939,6 +940,7 @@ cc_library_static {
             cortex_a9: {
                 srcs: [
                     "upstream-openbsd/lib/libc/string/memmove.c",
+                    "arch-arm/cortex-a9/bionic/new_arm.S",
                     "arch-arm/cortex-a9/bionic/stpcpy.S",
                     "arch-arm/cortex-a9/bionic/strcat.S",
                     "arch-arm/cortex-a9/bionic/strcpy.S",
@@ -953,6 +955,8 @@ cc_library_static {
                     "arch-arm/generic/bionic/strcmp.S",
                     "arch-arm/generic/bionic/strcpy.S",
                     "arch-arm/generic/bionic/strlen.c",
+                    "arch-arm/generic/bionic/memcpy.S",
+                    "arch-arm/generic/bionic/memset.S",
                 ],
             },
             cortex_a15: {
