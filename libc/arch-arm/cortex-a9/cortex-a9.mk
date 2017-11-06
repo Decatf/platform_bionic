@@ -35,14 +35,11 @@ libc_openbsd_src_files_exclude_arm += \
     upstream-openbsd/lib/libc/string/strcpy.c \
 
 libc_bionic_src_files_exclude_arm += \
-    arch-arm/generic/bionic/memcpy.S \
-    arch-arm/generic/bionic/memset.S \
     arch-arm/generic/bionic/strcmp.S \
     arch-arm/generic/bionic/strcpy.S \
     arch-arm/generic/bionic/strlen.c \
 
 libc_bionic_src_files_arm += \
-	arch-arm/cortex-a9/bionic/new_arm.S \
     arch-arm/generic/bionic/memmove.S \
     arch-arm/cortex-a9/bionic/stpcpy.S \
     arch-arm/cortex-a9/bionic/strcat.S \
