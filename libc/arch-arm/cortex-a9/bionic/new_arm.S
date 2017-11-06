@@ -22,6 +22,10 @@
  *
  */
 
+#if defined(ANDROID)
+#include <private/bionic_asm.h>
+#endif
+
 #ifdef CONFIG_THUMB
 #define W(instr) instr.w
 #define THUMB(instr...) instr
@@ -1478,6 +1482,24 @@ asm_function memcpy
 .endfunc
 #endif
 
+#elif defined(ANDROID)
+
+ENTRY(__memcpy_chk)
+        cmp         r2, r3
+        bls         memcpy
+
+        // Preserve lr for backtrace.
+        push        {lr}
+        .cfi_def_cfa_offset 4
+        .cfi_rel_offset lr, 0
+
+        bl          __memcpy_chk_fail
+END(__memcpy_chk)
+
+ENTRY(memcpy)
+        memcpy_variant 32, 4, 0, 0
+END(memcpy)
+
 #else
 
 asm_function memcpy_new_line_size_64_preload_192
@@ -1836,6 +1858,19 @@ asm_function memset
         memset_variant 32, 1
 .endfunc
 #endif
+
+#elif defined(ANDROID)
+
+ENTRY(__memset_chk)
+        cmp         r2, r3
+        bls         memset
+
+        bl          __memset_chk_fail
+END(__memset_chk)
+
+ENTRY(memset)
+        memset_variant 32, 0
+END(memset)
 
 #else
 
