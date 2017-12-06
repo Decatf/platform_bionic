@@ -110,4 +110,6 @@ memmove(void *dst0, const void *src0, size_t length) __overloadable
 done:
 	return (dst0);
 }
+#if 0
 DEF_STRONG(memmove);
+#endif
