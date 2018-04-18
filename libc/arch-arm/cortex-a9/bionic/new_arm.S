@@ -22,6 +22,11 @@
  *
  */
 
+#if defined(ANDROID)
+#include <private/bionic_asm.h>
+#include <private/libc_events.h>
+#endif
+
 #ifdef CONFIG_THUMB
 #define W(instr) instr.w
 #define THUMB(instr...) instr
@@ -1478,6 +1483,36 @@ asm_function memcpy
 .endfunc
 #endif
 
+#elif defined(ANDROID)
+
+ENTRY(__memcpy_chk)
+        cmp         r2, r3
+        bhi         __memcpy_chk_fail
+
+        // Fall through to memcpy...
+END(__memcpy_chk)
+
+ENTRY(memcpy)
+        memcpy_variant 32, 4, 0, 0
+END(memcpy)
+
+ENTRY_PRIVATE(__memcpy_chk_fail)
+        // Preserve lr for backtrace.
+        push    {lr}
+        .cfi_def_cfa_offset 4
+        .cfi_rel_offset lr, 0
+
+        ldr     r0, error_message
+        ldr     r1, error_code
+1:
+        add     r0, pc
+        bl      __fortify_chk_fail
+error_code:
+        .word   BIONIC_EVENT_MEMCPY_BUFFER_OVERFLOW
+error_message:
+        .word   error_string-(1b+4)
+END(__memcpy_chk_fail)
+
 #else
 
 asm_function memcpy_new_line_size_64_preload_192
@@ -1837,6 +1872,43 @@ asm_function memset
 .endfunc
 #endif
 
+#elif defined(ANDROID)
+
+ENTRY(__memset_chk)
+        cmp         r2, r3
+        bls         .L_done
+
+        // Preserve lr for backtrace.
+        push        {lr}
+        .cfi_def_cfa_offset 4
+        .cfi_rel_offset lr, 0
+
+        ldr         r0, memset_error_message
+        ldr         r1, memset_error_code
+1:
+        add         r0, pc
+        bl          __fortify_chk_fail
+memset_error_code:
+        .word       BIONIC_EVENT_MEMSET_BUFFER_OVERFLOW
+memset_error_message:
+        .word       error_string-(1b+8)
+END(__memset_chk)
+
+ENTRY(bzero)
+        mov     r2, r1
+        mov     r1, #0
+
+.L_done:
+        // Fall through to memset...
+END(bzero)
+
+ENTRY(memset)
+        memset_variant 32, 0
+END(memset)
+
+        .data
+error_string:
+        .string     "memset: prevented write past end of buffer"
 #else
 
 asm_function memset_new_align_0
