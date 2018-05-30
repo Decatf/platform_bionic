@@ -58,7 +58,6 @@ LOCAL_SRC_FILES := \
     upstream-freebsd/lib/msun/src/e_log2.c \
     upstream-freebsd/lib/msun/src/e_log.c \
     upstream-freebsd/lib/msun/src/e_pow.c \
-    upstream-freebsd/lib/msun/src/e_powf.c \
     upstream-freebsd/lib/msun/src/e_remainder.c \
     upstream-freebsd/lib/msun/src/e_remainderf.c \
     upstream-freebsd/lib/msun/src/e_rem_pio2.c \
@@ -189,6 +188,8 @@ LOCAL_SRC_FILES := \
     optimized-routines/logf_data.c \
     optimized-routines/log2f_data.c \
     optimized-routines/math_errf.c \
+    optimized-routines/powf.c \
+    optimized-routines/powf_log2_data.c \
 
 LOCAL_SRC_FILES_32 += \
     fake_long_double.c \
