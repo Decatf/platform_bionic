@@ -122,7 +122,6 @@ LOCAL_SRC_FILES := \
     upstream-freebsd/lib/msun/src/s_erf.c \
     upstream-freebsd/lib/msun/src/s_erff.c \
     upstream-freebsd/lib/msun/src/s_exp2.c \
-    upstream-freebsd/lib/msun/src/s_exp2f.c \
     upstream-freebsd/lib/msun/src/s_expm1.c \
     upstream-freebsd/lib/msun/src/s_expm1f.c \
     upstream-freebsd/lib/msun/src/s_fdim.c \
@@ -185,6 +184,7 @@ LOCAL_SRC_FILES := \
     upstream-freebsd/lib/msun/src/w_drem.c \
     upstream-freebsd/lib/msun/src/w_dremf.c \
     optimized-routines/expf.c \
+    optimized-routines/exp2f.c \
     optimized-routines/exp2f_data.c \
     optimized-routines/math_errf.c \
 
