@@ -56,7 +56,6 @@ LOCAL_SRC_FILES := \
     upstream-freebsd/lib/msun/src/e_log10.c \
     upstream-freebsd/lib/msun/src/e_log10f.c \
     upstream-freebsd/lib/msun/src/e_log2.c \
-    upstream-freebsd/lib/msun/src/e_log2f.c \
     upstream-freebsd/lib/msun/src/e_log.c \
     upstream-freebsd/lib/msun/src/e_pow.c \
     upstream-freebsd/lib/msun/src/e_powf.c \
@@ -186,7 +185,9 @@ LOCAL_SRC_FILES := \
     optimized-routines/exp2f.c \
     optimized-routines/exp2f_data.c \
     optimized-routines/logf.c \
+    optimized-routines/log2f.c \
     optimized-routines/logf_data.c \
+    optimized-routines/log2f_data.c \
     optimized-routines/math_errf.c \
 
 LOCAL_SRC_FILES_32 += \
