@@ -35,7 +35,6 @@ LOCAL_SRC_FILES := \
     upstream-freebsd/lib/msun/src/e_cosh.c \
     upstream-freebsd/lib/msun/src/e_coshf.c \
     upstream-freebsd/lib/msun/src/e_exp.c \
-    upstream-freebsd/lib/msun/src/e_expf.c \
     upstream-freebsd/lib/msun/src/e_fmod.c \
     upstream-freebsd/lib/msun/src/e_fmodf.c \
     upstream-freebsd/lib/msun/src/e_gamma.c \
@@ -185,6 +184,9 @@ LOCAL_SRC_FILES := \
     upstream-freebsd/lib/msun/src/w_cabsl.c \
     upstream-freebsd/lib/msun/src/w_drem.c \
     upstream-freebsd/lib/msun/src/w_dremf.c \
+    optimized-routines/expf.c \
+    optimized-routines/exp2f_data.c \
+    optimized-routines/math_errf.c \
 
 LOCAL_SRC_FILES_32 += \
     fake_long_double.c \
