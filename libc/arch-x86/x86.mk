@@ -78,7 +78,6 @@ endif
 
 libc_openbsd_src_files_exclude_x86 += \
     upstream-openbsd/lib/libc/string/memchr.c \
-    upstream-openbsd/lib/libc/string/memmove.c \
     upstream-openbsd/lib/libc/string/memrchr.c \
     upstream-openbsd/lib/libc/string/stpcpy.c \
     upstream-openbsd/lib/libc/string/stpncpy.c \

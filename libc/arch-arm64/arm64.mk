@@ -29,7 +29,6 @@ libc_freebsd_src_files_exclude_arm64 += \
 
 libc_openbsd_src_files_exclude_arm64 += \
     upstream-openbsd/lib/libc/string/memchr.c \
-    upstream-openbsd/lib/libc/string/memmove.c \
     upstream-openbsd/lib/libc/string/stpcpy.c \
     upstream-openbsd/lib/libc/string/strcpy.c \
     upstream-openbsd/lib/libc/string/strncmp.c \

@@ -5,7 +5,6 @@
 #
 
 libc_openbsd_src_files_exclude_x86_64 += \
-    upstream-openbsd/lib/libc/string/memmove.c \
     upstream-openbsd/lib/libc/string/stpcpy.c \
     upstream-openbsd/lib/libc/string/stpncpy.c \
     upstream-openbsd/lib/libc/string/strcat.c \

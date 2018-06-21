@@ -4,7 +4,6 @@
 # decrease performance on cortex-a57 processors by as much as 20%.
 
 libc_openbsd_src_files_exclude_arm += \
-    upstream-openbsd/lib/libc/string/memmove.c \
     upstream-openbsd/lib/libc/string/stpcpy.c \
     upstream-openbsd/lib/libc/string/strcat.c \
 
