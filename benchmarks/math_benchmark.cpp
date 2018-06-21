@@ -236,7 +236,7 @@ BENCHMARK_COMMON_VALS(BM_math_fabs);
 static void BM_math_expf_speccpu2017(benchmark::State& state) {
   f = 0.0;
   auto cin = expf_input.cbegin();
-  for (auto _ : state) {
+  while (state.KeepRunning()) {
     f = expf(*cin);
     if (++cin == expf_input.cend())
       cin = expf_input.cbegin();
@@ -247,7 +247,7 @@ BENCHMARK(BM_math_expf_speccpu2017);
 static void BM_math_expf_speccpu2017_latency(benchmark::State& state) {
   f = 0.0;
   auto cin = expf_input.cbegin();
-  for (auto _ : state) {
+  while (state.KeepRunning()) {
     f = expf(f * zero + *cin);
     if (++cin == expf_input.cend())
       cin = expf_input.cbegin();
@@ -258,7 +258,7 @@ BENCHMARK(BM_math_expf_speccpu2017_latency);
 static void BM_math_exp2f_speccpu2017(benchmark::State& state) {
   f = 0.0;
   auto cin = expf_input.cbegin();
-  for (auto _ : state) {
+  while (state.KeepRunning()) {
     f = exp2f(*cin);
     if (++cin == expf_input.cend())
       cin = expf_input.cbegin();
@@ -269,7 +269,7 @@ BENCHMARK(BM_math_exp2f_speccpu2017);
 static void BM_math_exp2f_speccpu2017_latency(benchmark::State& state) {
   f = 0.0;
   auto cin = expf_input.cbegin();
-  for (auto _ : state) {
+  while (state.KeepRunning()) {
     f = exp2f(f * zero + *cin);
     if (++cin == expf_input.cend())
       cin = expf_input.cbegin();
@@ -282,7 +282,7 @@ BENCHMARK(BM_math_exp2f_speccpu2017_latency);
 static void BM_math_powf_speccpu2006(benchmark::State& state) {
   f = 0.0;
   auto cin = powf_input.cbegin();
-  for (auto _ : state) {
+  while (state.KeepRunning()) {
     f = powf(cin->first, cin->second);
     if (++cin == powf_input.cend())
       cin = powf_input.cbegin();
@@ -293,7 +293,7 @@ BENCHMARK(BM_math_powf_speccpu2006);
 static void BM_math_powf_speccpu2017_latency(benchmark::State& state) {
   f = 0.0;
   auto cin = powf_input.cbegin();
-  for (auto _ : state) {
+  while (state.KeepRunning()) {
     f = powf(f * zero + cin->first, cin->second);
     if (++cin == powf_input.cend())
       cin = powf_input.cbegin();
@@ -306,7 +306,7 @@ BENCHMARK(BM_math_powf_speccpu2017_latency);
 static void BM_math_logf_speccpu2017(benchmark::State& state) {
   f = 0.0;
   auto cin = logf_input.cbegin();
-  for (auto _ : state) {
+  while (state.KeepRunning()) {
     f = logf(*cin);
     if (++cin == logf_input.cend())
       cin = logf_input.cbegin();
@@ -317,7 +317,7 @@ BENCHMARK(BM_math_logf_speccpu2017);
 static void BM_math_logf_speccpu2017_latency(benchmark::State& state) {
   f = 0.0;
   auto cin = logf_input.cbegin();
-  for (auto _ : state) {
+  while (state.KeepRunning()) {
     f = logf(f * zero + *cin);
     if (++cin == logf_input.cend())
       cin = logf_input.cbegin();
@@ -328,7 +328,7 @@ BENCHMARK(BM_math_logf_speccpu2017_latency);
 static void BM_math_log2f_speccpu2017(benchmark::State& state) {
   f = 0.0;
   auto cin = logf_input.cbegin();
-  for (auto _ : state) {
+  while (state.KeepRunning()) {
     f = log2f(*cin);
     if (++cin == logf_input.cend())
       cin = logf_input.cbegin();
@@ -339,7 +339,7 @@ BENCHMARK(BM_math_log2f_speccpu2017);
 static void BM_math_log2f_speccpu2017_latency(benchmark::State& state) {
   f = 0.0;
   auto cin = logf_input.cbegin();
-  for (auto _ : state) {
+  while (state.KeepRunning()) {
     f = log2f(f * zero + *cin);
     if (++cin == logf_input.cend())
       cin = logf_input.cbegin();
